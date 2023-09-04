@@ -14,37 +14,12 @@ let camWidth = 0;
 let camHeight = 0;
 
 //text
-let predictionText = "";
-let predictionPercentage = "";
-let lemonPercentage = "";
-
-let facingMode = "not set";
-if (navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices
-    .getUserMedia({
-      video: {
-        facingMode: { exact: "environment" },
-      },
-    })
-    .then(function (stream) {
-      console.log("video loaded environment");
-      facingMode = "environment";
-    })
-    .catch(function (err0r) {
-      console.log("Something went wrong with environment!");
-      navigator.mediaDevices
-        .getUserMedia({
-          video: true,
-        })
-        .then(function (stream) {
-          console.log("video loaded user");
-          facingMode = "user";
-        })
-        .catch(function (err0r) {
-          console.log("Something went wrong with user!");
-        });
-    });
-}
+let predictionText1 = "";
+let predictionText2 = "";
+let predictionText3 = "";
+let predictionPercentage1 = "";
+let lemonPercentage1 = "";
+let lemonPercentage2 = "";
 
 function setup() {
   // put setup code here
@@ -71,10 +46,14 @@ function setup() {
   mobilenet = ml5.imageClassifier("MobileNet", capture, modelReady);
 
   // get text ready
-  predictionText = select("#prediction-text");
-  predictionPercentage = select("#prediction-percentage");
-  lemonPercentage = select("#lemon-percentage");
-  facingModeText = select("#facing-mode");
+  predictionText1 = select("#prediction-text-1");
+  predictionText2 = select("#prediction-text-2");
+  predictionText3 = select("#prediction-text-3");
+  predictionPercentage1 = select("#prediction-percentage-1");
+  predictionPercentage2 = select("#prediction-percentage-2");
+  predictionPercentage3 = select("#prediction-percentage-3");
+  lemonPercentage1 = select("#lemon-percentage-1");
+  lemonPercentage2 = select("#lemon-percentage-2");
 }
 
 function draw() {
@@ -114,17 +93,20 @@ function gotResult(error, results) {
   } else {
     resultNumber = search("lemon", results);
 
-    let predictionProbability = percentagise(results[0].probability);
-    // Math.round(results[0].probability * 1000000) / 10000;
-    // predictionProbability = predictionProbability.toFixed(3);
+    let predictionProbability1 = percentagise(results[0].probability);
+    let predictionProbability2 = percentagise(results[1].probability);
+    let predictionProbability3 = percentagise(results[2].probability);
 
     let lemonProbability = percentagise(results[resultNumber].probability);
-    // Math.round(results[resultNumber].probability * 1000000) / 10000;
 
-    predictionText.html(results[0].className);
-    predictionPercentage.html(predictionProbability + "%");
-    lemonPercentage.html(lemonProbability + "%");
-    facingModeText.html(facingMode);
+    predictionText1.html(results[0].className);
+    predictionText2.html(results[1].className);
+    predictionText3.html(results[2].className);
+    predictionPercentage1.html(predictionProbability1 + "%");
+    predictionPercentage2.html(predictionProbability2 + "%");
+    predictionPercentage3.html(predictionProbability3 + "%");
+    lemonPercentage1.html(lemonProbability + "%");
+    lemonPercentage2.html(lemonProbability + "%");
   }
 }
 
