@@ -18,6 +18,34 @@ let predictionText = "";
 let predictionPercentage = "";
 let lemonPercentage = "";
 
+let facingMode = "not set";
+if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices
+    .getUserMedia({
+      video: {
+        facingMode: { exact: "environment" },
+      },
+    })
+    .then(function (stream) {
+      console.log("video loaded environment");
+      facingMode = "environment";
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong with environment!");
+      navigator.mediaDevices
+        .getUserMedia({
+          video: true,
+        })
+        .then(function (stream) {
+          console.log("video loaded user");
+          facingMode = "user";
+        })
+        .catch(function (err0r) {
+          console.log("Something went wrong with user!");
+        });
+    });
+}
+
 function setup() {
   // put setup code here
   let shortWindowSide = windowWidth > windowHeight ? windowHeight : windowWidth;
@@ -31,11 +59,13 @@ function setup() {
         facingMode: "environment",
       },
     },
-    function () {
+    function (e) {
       // do things when video ready
+      console.log("loaded", e);
     }
   );
   capture.elt.setAttribute("playsinline", "");
+  console.log(capture);
   capture.hide();
   background(0);
   mobilenet = ml5.imageClassifier("MobileNet", capture, modelReady);
@@ -44,6 +74,7 @@ function setup() {
   predictionText = select("#prediction-text");
   predictionPercentage = select("#prediction-percentage");
   lemonPercentage = select("#lemon-percentage");
+  facingModeText = select("#facing-mode");
 }
 
 function draw() {
@@ -93,6 +124,7 @@ function gotResult(error, results) {
     predictionText.html(results[0].className);
     predictionPercentage.html(predictionProbability + "%");
     lemonPercentage.html(lemonProbability + "%");
+    facingModeText.html(facingMode);
   }
 }
 
