@@ -179,12 +179,14 @@ function pixelate() {
         fill(r, g, b);
         // rectMode(CENTER);
         let rectSize = vScale * step;
-        rect(
-          squareSize - x * vScale - rectSize,
-          y * vScale,
-          rectSize,
-          rectSize
-        );
+
+        // rect(
+        //   squareSize - x * vScale - rectSize,
+        //   y * vScale,
+        //   rectSize,
+        //   rectSize
+        // );
+        rect(x * vScale, y * vScale, rectSize, rectSize);
       }
     }
   }
