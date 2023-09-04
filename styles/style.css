@@ -1,5 +1,5 @@
 :root {
-  --text-size: min(15vh, 15vw);
+  --text-size: min(11vh, 11vw);
 }
 
 html,
@@ -62,6 +62,9 @@ video {
 
 #prediction {
   display: none;
+}
+#lemon-percentage {
+  width: min(100vw, 100vh);
 }
 
 .container {
