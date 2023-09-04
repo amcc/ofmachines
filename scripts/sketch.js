@@ -53,6 +53,7 @@ function setup() {
   predictionPercentage2 = select("#prediction-percentage-2");
   predictionPercentage3 = select("#prediction-percentage-3");
   lemonPercentage1 = select("#lemon-percentage-1");
+  lemonText = select("#lemon-text");
   lemonPercentage2 = select("#lemon-percentage-2");
 }
 
@@ -99,14 +100,20 @@ function gotResult(error, results) {
 
     let lemonProbability = percentagise(results[resultNumber].probability);
 
+    lemonPercentage1.html(lemonProbability + "%");
     predictionText1.html(results[0].className);
     predictionText2.html(results[1].className);
     predictionText3.html(results[2].className);
     predictionPercentage1.html(predictionProbability1 + "%");
     predictionPercentage2.html(predictionProbability2 + "%");
     predictionPercentage3.html(predictionProbability3 + "%");
-    lemonPercentage1.html(lemonProbability + "%");
-    lemonPercentage2.html(lemonProbability + "%");
+    if (resultNumber > 2) {
+      lemonText.html("lemon");
+      lemonPercentage2.html(lemonProbability + "%");
+    } else {
+      lemonText.html("");
+      lemonPercentage2.html("");
+    }
   }
 }
 
