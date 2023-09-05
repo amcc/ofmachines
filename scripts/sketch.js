@@ -139,17 +139,8 @@ function makeCamImage() {
 
   img = createImage(11, 11);
 
-  img.copy(
-    capture,
-    camDiff + 1,
-    1,
-    camShortSide - 2,
-    camShortSide - 2,
-    0,
-    0,
-    11,
-    11
-  );
+  console.log("capture", capture.width, capture.height);
+  img.copy(capture, camDiff, 1, camShortSide, camShortSide, 0, 0, 11, 11);
 }
 
 function pixelate() {
@@ -160,7 +151,7 @@ function pixelate() {
     // let step = Math.ceil(squareSize / 11);
     let step = squareSize / 11;
     let vScale = 1;
-    console.log(pixImage.width, pixImage.height);
+    console.log("pix sizes: ", pixImage.width, pixImage.height);
     for (let y = 0; y < pixImage.height; y += 1) {
       for (let x = 0; x < pixImage.width; x += 1) {
         let index = (x + y * pixImage.width) * 4;
@@ -190,6 +181,15 @@ function getSizes() {
       : (capture.height - capture.width) / 2;
   camShortSide =
     capture.width > capture.height ? capture.height : capture.width;
+
+  console.log(
+    "camDiff",
+    camDiff,
+    "camShortSide",
+    camShortSide,
+    "squareSize",
+    squareSize
+  );
 }
 
 function windowResized() {
