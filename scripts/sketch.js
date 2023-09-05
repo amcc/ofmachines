@@ -59,7 +59,7 @@ function setup() {
 function draw() {
   makeCamImage();
   pixelate();
-  // image(img, 0, 0, squareSize, squareSize);
+  image(img, 0, 0, img.width * 23.4, img.height * 23.4);
 
   // background(0);
   // only predict every now and then
@@ -129,11 +129,11 @@ function percentagise(number) {
 }
 
 function makeCamImage() {
-  if (capture.width !== camWidth || capture.height !== camHeight) {
-    debounce(() => getSizes());
-    camWidth = capture.width;
-    camHeight = capture.height;
-  }
+  // if (capture.width !== camWidth || capture.height !== camHeight) {
+  //   debounce(() => getSizes());
+  //   camWidth = capture.width;
+  //   camHeight = capture.height;
+  // }
   getSizes();
   // The capture element is initially smaller than it should be
 
@@ -160,6 +160,7 @@ function pixelate() {
     // let step = Math.ceil(squareSize / 11);
     let step = squareSize / 11;
     let vScale = 1;
+    console.log(pixImage.width, pixImage.height);
     for (let y = 0; y < pixImage.height; y += 1) {
       for (let x = 0; x < pixImage.width; x += 1) {
         let index = (x + y * pixImage.width) * 4;
