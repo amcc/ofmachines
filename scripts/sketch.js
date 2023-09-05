@@ -1,6 +1,5 @@
 let mobilenet;
 let capture;
-let label;
 let probability;
 let resultNumber;
 let countDown = 5;
@@ -26,7 +25,7 @@ function setup() {
   let shortWindowSide = windowWidth > windowHeight ? windowHeight : windowWidth;
   const canvas = createCanvas(shortWindowSide, shortWindowSide);
   canvas.parent("canvas-container");
-  label = "loading AI model";
+  frameRate(25);
   capture = createCapture(
     {
       audio: false,
@@ -59,8 +58,8 @@ function setup() {
 
 function draw() {
   makeCamImage();
-  // image(img, 0, 0, squareSize, squareSize);
   pixelate();
+  // image(img, 0, 0, squareSize, squareSize);
 
   // background(0);
   // only predict every now and then
@@ -73,7 +72,6 @@ function draw() {
   fill(0);
   textFont("Roboto Condensed");
   textSize(height / 19);
-  // text(label, 20, height / 2);
 }
 
 function search(nameKey, myArray) {
@@ -136,50 +134,31 @@ function makeCamImage() {
   getSizes();
   // The capture element is initially smaller than it should be
 
-  img = createImage(squareSize, squareSize);
+  img = createImage(11, 11);
 
-  img.copy(
-    capture,
-    camDiff,
-    0,
-    camShortSide,
-    camShortSide,
-    0,
-    0,
-    squareSize,
-    squareSize
-  );
+  img.copy(capture, camDiff, 0, camShortSide, camShortSide, 0, 0, 11, 11);
 }
 
 function pixelate() {
+  //to do - scale image down to 11px then go through all px
   if (img) {
     let pixImage = img.get();
     pixImage.loadPixels();
     // let step = Math.ceil(squareSize / 11);
     let step = squareSize / 11;
     let vScale = 1;
-    for (let y = 0; y < pixImage.height; y += step) {
-      for (let x = 0; x < pixImage.width; x += step) {
-        let roundX = Math.round(x);
-        let roundY = Math.round(y);
-        let index = (roundX + roundY * pixImage.width) * 4;
+    for (let y = 0; y < pixImage.height; y += 1) {
+      for (let x = 0; x < pixImage.width; x += 1) {
+        let index = (x + y * pixImage.width) * 4;
         let r = pixImage.pixels[index + 0];
         let g = pixImage.pixels[index + 1];
         let b = pixImage.pixels[index + 2];
-        // var bright = (r + g + b) / 3;
         noStroke();
         fill(r, g, b);
-        stroke(r, g, b);
-        // rectMode(CENTER);
+        // stroke(r, g, b);
         let rectSize = vScale * step;
 
-        // rect(
-        //   squareSize - x * vScale - rectSize,
-        //   y * vScale,
-        //   rectSize,
-        //   rectSize
-        // );
-        rect(roundX * vScale, roundY * vScale, rectSize, rectSize);
+        rect(x * vScale * step, y * vScale * step, rectSize, rectSize);
       }
     }
   }
