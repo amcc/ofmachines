@@ -35,11 +35,10 @@ function setup() {
     },
     function (e) {
       // do things when video ready
-      console.log("loaded", e);
     }
   );
   capture.elt.setAttribute("playsinline", "");
-  console.log(capture);
+  // console.log(capture);
   capture.hide();
   background(0);
   mobilenet = ml5.imageClassifier("MobileNet", capture, modelReady);
@@ -59,7 +58,7 @@ function setup() {
 function draw() {
   makeCamImage();
   pixelate();
-  image(img, 0, 0, img.width * 23.4, img.height * 23.4);
+  // image(img, 0, 0, img.width * 23.4, img.height * 23.4);
 
   // background(0);
   // only predict every now and then
@@ -109,8 +108,8 @@ function gotResult(error, results) {
       lemonText.html("lemon");
       lemonPercentage2.html(lemonProbability + "%");
     } else {
-      lemonText.html("");
-      lemonPercentage2.html("");
+      lemonText.html(" ");
+      lemonPercentage2.html(" ");
     }
 
     //predict again:
@@ -139,8 +138,11 @@ function makeCamImage() {
 
   img = createImage(11, 11);
 
-  console.log("capture", capture.width, capture.height);
-  img.copy(capture, camDiff, 1, camShortSide, camShortSide, 0, 0, 11, 11);
+  if (capture.width > capture.height) {
+    img.copy(capture, camDiff, 0, camShortSide, camShortSide, 0, 0, 11, 11);
+  } else {
+    img.copy(capture, 0, camDiff, camShortSide, camShortSide, 0, 0, 11, 11);
+  }
 }
 
 function pixelate() {
@@ -151,7 +153,7 @@ function pixelate() {
     // let step = Math.ceil(squareSize / 11);
     let step = squareSize / 11;
     let vScale = 1;
-    console.log("pix sizes: ", pixImage.width, pixImage.height);
+
     for (let y = 0; y < pixImage.height; y += 1) {
       for (let x = 0; x < pixImage.width; x += 1) {
         let index = (x + y * pixImage.width) * 4;
@@ -181,15 +183,6 @@ function getSizes() {
       : (capture.height - capture.width) / 2;
   camShortSide =
     capture.width > capture.height ? capture.height : capture.width;
-
-  console.log(
-    "camDiff",
-    camDiff,
-    "camShortSide",
-    camShortSide,
-    "squareSize",
-    squareSize
-  );
 }
 
 function windowResized() {
