@@ -155,17 +155,21 @@ function pixelate() {
   if (img) {
     let pixImage = img.get();
     pixImage.loadPixels();
-    let step = Math.ceil(squareSize / 11);
+    // let step = Math.ceil(squareSize / 11);
+    let step = squareSize / 11;
     let vScale = 1;
-    for (var y = 0; y < pixImage.height; y += step) {
-      for (var x = 0; x < pixImage.width; x += step) {
-        var index = (x + y * pixImage.width) * 4;
-        var r = pixImage.pixels[index + 0];
-        var g = pixImage.pixels[index + 1];
-        var b = pixImage.pixels[index + 2];
+    for (let y = 0; y < pixImage.height; y += step) {
+      for (let x = 0; x < pixImage.width; x += step) {
+        let roundX = Math.round(x);
+        let roundY = Math.round(y);
+        let index = (roundX + roundY * pixImage.width) * 4;
+        let r = pixImage.pixels[index + 0];
+        let g = pixImage.pixels[index + 1];
+        let b = pixImage.pixels[index + 2];
         // var bright = (r + g + b) / 3;
         noStroke();
         fill(r, g, b);
+        stroke(r, g, b);
         // rectMode(CENTER);
         let rectSize = vScale * step;
 
@@ -175,7 +179,7 @@ function pixelate() {
         //   rectSize,
         //   rectSize
         // );
-        rect(x * vScale, y * vScale, rectSize, rectSize);
+        rect(roundX * vScale, roundY * vScale, rectSize, rectSize);
       }
     }
   }
