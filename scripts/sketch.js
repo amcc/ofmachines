@@ -139,7 +139,17 @@ function makeCamImage() {
 
   img = createImage(11, 11);
 
-  img.copy(capture, camDiff, 0, camShortSide, camShortSide, 0, 0, 11, 11);
+  img.copy(
+    capture,
+    camDiff + 1,
+    1,
+    camShortSide - 2,
+    camShortSide - 2,
+    0,
+    0,
+    11,
+    11
+  );
 }
 
 function pixelate() {
@@ -169,10 +179,14 @@ function pixelate() {
 
 function getSizes() {
   squareSize = width > height ? height : width;
+  // camDiff =
+  //   capture.width > capture.height
+  //     ? Math.floor((capture.width - capture.height) / 2)
+  //     : Math.floor((capture.height - capture.width) / 2);
   camDiff =
     capture.width > capture.height
-      ? Math.floor((capture.width - capture.height) / 2)
-      : Math.floor((capture.height - capture.width) / 2);
+      ? (capture.width - capture.height) / 2
+      : (capture.height - capture.width) / 2;
   camShortSide =
     capture.width > capture.height ? capture.height : capture.width;
 }
