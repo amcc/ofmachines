@@ -63,10 +63,10 @@ function draw() {
 
   // background(0);
   // only predict every now and then
-  if (countDown == 0) {
-    mobilenet.predict(1000, gotResult);
-    countDown = 15;
-  }
+  // if (countDown == 0) {
+  //   mobilenet.predict(1000, gotResult);
+  //   countDown = 15;
+  // }
   countDown--;
   // make the text
   fill(0);
@@ -99,9 +99,9 @@ function gotResult(error, results) {
     let lemonProbability = percentagise(results[resultNumber].probability);
 
     lemonPercentage1.html(lemonProbability + "%");
-    predictionText1.html(results[0].className);
-    predictionText2.html(results[1].className);
-    predictionText3.html(results[2].className);
+    predictionText1.html(results[0].className.split(",", 1));
+    predictionText2.html(results[1].className.split(",", 1));
+    predictionText3.html(results[2].className.split(",", 1));
     predictionPercentage1.html(predictionProbability1 + "%");
     predictionPercentage2.html(predictionProbability2 + "%");
     predictionPercentage3.html(predictionProbability3 + "%");
@@ -112,6 +112,9 @@ function gotResult(error, results) {
       lemonText.html("");
       lemonPercentage2.html("");
     }
+
+    //predict again:
+    mobilenet.predict(1000, gotResult);
   }
 }
 
