@@ -3,6 +3,7 @@ let capture;
 let probability;
 let resultNumber;
 let countDown = 5;
+let receivedResult = false;
 
 //pixelation
 let img;
@@ -19,13 +20,15 @@ let predictionText3 = "";
 let predictionPercentage1 = "";
 let lemonPercentage1 = "";
 let lemonPercentage2 = "";
+let decimalPlaces = 3;
 
 function setup() {
   // put setup code here
   let shortWindowSide = windowWidth > windowHeight ? windowHeight : windowWidth;
   const canvas = createCanvas(shortWindowSide, shortWindowSide);
   canvas.parent("canvas-container");
-  frameRate(25);
+  describe("pixellated image from the webcam or phone camera", FALLBACK);
+  frameRate(15);
   capture = createCapture(
     {
       audio: false,
@@ -71,6 +74,11 @@ function draw() {
   fill(0);
   textFont("Roboto Condensed");
   textSize(height / 19);
+
+  if (receivedResult && frameCount % 6 === 0) {
+    mobilenet.predict(1000, gotResult);
+    receivedResult = false;
+  }
 }
 
 function search(nameKey, myArray) {
@@ -97,7 +105,15 @@ function gotResult(error, results) {
 
     let lemonProbability = percentagise(results[resultNumber].probability);
 
-    lemonPercentage1.html(lemonProbability + "%");
+    let lemonProbabilityArray = splitToArray(results[resultNumber].probability);
+    lemonPercentage1.html(`
+    <span>${lemonProbabilityArray[0]}</span>
+    <span>${lemonProbabilityArray[1]}</span>
+    <span>.</span>
+    <span>${lemonProbabilityArray[2]}</span>
+    <span>${lemonProbabilityArray[3]}</span>
+    <span>${lemonProbabilityArray[4]}</span>
+    <span>%</span>`);
     predictionText1.html(results[0].className.split(",", 1));
     predictionText2.html(results[1].className.split(",", 1));
     predictionText3.html(results[2].className.split(",", 1));
@@ -113,18 +129,28 @@ function gotResult(error, results) {
     }
 
     //predict again:
-    mobilenet.predict(1000, gotResult);
+    receivedResult = true;
+    // noLoop();
   }
 }
 
 function percentagise(number) {
   const percentage = Math.round(number * 1000000) / 10000;
-  const fixed = percentage.toFixed(3);
+  const fixed = percentage.toFixed(decimalPlaces);
   if (fixed < 10) {
     return "0" + fixed;
   } else {
     return fixed;
   }
+}
+
+function splitToArray(number) {
+  let split = String(number).split(".")[1];
+  let numberArray = [];
+  for (let i = 0; i < decimalPlaces + 2; i++) {
+    numberArray.push(split[i]);
+  }
+  return numberArray;
 }
 
 function makeCamImage() {
