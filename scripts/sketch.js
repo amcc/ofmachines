@@ -47,7 +47,6 @@ function setup() {
     }
   );
   capture.elt.setAttribute("playsinline", "");
-  // console.log(capture);
   capture.hide();
   background(255);
   mobilenet = ml5.imageClassifier("MobileNet", capture, modelReady);
@@ -155,7 +154,6 @@ function gotResult(error, results) {
 
     //change yellow:
     currentLemonValue = results[resultNumber].probability.toFixed(3) * 10;
-    console.log(currentLemonValue);
 
     //predict again:
     receivedResult = true;
