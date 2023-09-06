@@ -9,6 +9,7 @@
   --title-text-size: 40px;
   --prediction-text-size: min(9vh, 9vw);
   /* --prediction-text-size: min(3vh, 3vw); */
+  --lemon: rgba(255, 255, 0, 0);
 }
 
 html,
@@ -82,7 +83,7 @@ video {
 }
 
 .lemon-container {
-  padding-top: min(calc(100vh / 11), calc(100vw / 11));
+  padding-top: min(calc(100vh / 11 * 5), calc(100vw / 11 * 5));
 }
 
 #lemon-2 {
@@ -106,7 +107,7 @@ video {
 
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.2);
+  /* background-color: rgba(0, 0, 0, 0.2); */
 }
 .container {
   width: min(100vw, 100vh);
@@ -132,7 +133,7 @@ video {
   margin: 40px 0;
 }
 .lemon {
-  background-color: yellow;
+  background-color: var(--lemon);
 }
 
 .bigger-text {

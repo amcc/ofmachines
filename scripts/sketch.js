@@ -21,6 +21,12 @@ let predictionPercentage1 = "";
 let lemonPercentage1 = "";
 let lemonPercentage2 = "";
 let decimalPlaces = 3;
+// alpha of the lemon words
+let currentLemonValue = 0;
+let lemonValue = 0;
+let lerpRate = 0.4;
+
+let root = document.documentElement;
 
 function setup() {
   // put setup code here
@@ -79,6 +85,10 @@ function draw() {
     mobilenet.predict(1000, gotResult);
     receivedResult = false;
   }
+
+  // change the yellow of the lemon words
+  lemonValue = lerp(lemonValue, currentLemonValue, lerpRate);
+  root.style.setProperty("--lemon", `rgb(255, 255, 0, ${lemonValue})`);
 }
 
 function search(nameKey, myArray) {
@@ -106,14 +116,29 @@ function gotResult(error, results) {
     let lemonProbability = percentagise(results[resultNumber].probability);
 
     let lemonProbabilityArray = splitToArray(results[resultNumber].probability);
+    // lemonPercentage1.html(`
+    // <span>${lemonProbabilityArray[0]}</span>
+    // <span>${lemonProbabilityArray[1]}</span>
+    // <span>.</span>
+    // <span>${lemonProbabilityArray[2]}</span>
+    // <span>${lemonProbabilityArray[3]}</span>
+    // <span>${lemonProbabilityArray[4]}</span>
+    // <span>%</span>`);
+
     lemonPercentage1.html(`
-    <span>${lemonProbabilityArray[0]}</span>
+    <span>l</span>
+    <span>e</span>
+    <span>m</span>
+    <span>o</span>
+    <span>n</span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span>${lemonProbabilityArray[0] > 0 ? lemonProbabilityArray[0] : ""}</span>
     <span>${lemonProbabilityArray[1]}</span>
-    <span>.</span>
-    <span>${lemonProbabilityArray[2]}</span>
-    <span>${lemonProbabilityArray[3]}</span>
-    <span>${lemonProbabilityArray[4]}</span>
-    <span>%</span>`);
+    <span>%</span>
+    `);
+
     predictionText1.html(results[0].className.split(",", 1));
     predictionText2.html(results[1].className.split(",", 1));
     predictionText3.html(results[2].className.split(",", 1));
@@ -127,6 +152,10 @@ function gotResult(error, results) {
       lemonText.html(" ");
       lemonPercentage2.html(" ");
     }
+
+    //change yellow:
+    currentLemonValue = results[resultNumber].probability.toFixed(3) * 10;
+    console.log(currentLemonValue);
 
     //predict again:
     receivedResult = true;
@@ -145,10 +174,7 @@ function percentagise(number) {
 }
 
 function splitToArray(number) {
-  console.log("number", number);
   let limitedNumber = number.toFixed(decimalPlaces + 2);
-
-  console.log("limitedNumber", limitedNumber);
   let split = String(limitedNumber).split(".")[1];
   let numberArray = [];
   for (let i = 0; i < decimalPlaces + 2; i++) {
