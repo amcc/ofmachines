@@ -49,7 +49,7 @@ function setup() {
   capture.elt.setAttribute("playsinline", "");
   // console.log(capture);
   capture.hide();
-  background(0);
+  background(255);
   mobilenet = ml5.imageClassifier("MobileNet", capture, modelReady);
 
   // get text ready
@@ -116,28 +116,28 @@ function gotResult(error, results) {
     let lemonProbability = percentagise(results[resultNumber].probability);
 
     let lemonProbabilityArray = splitToArray(results[resultNumber].probability);
-    // lemonPercentage1.html(`
-    // <span>${lemonProbabilityArray[0]}</span>
-    // <span>${lemonProbabilityArray[1]}</span>
-    // <span>.</span>
-    // <span>${lemonProbabilityArray[2]}</span>
-    // <span>${lemonProbabilityArray[3]}</span>
-    // <span>${lemonProbabilityArray[4]}</span>
-    // <span>%</span>`);
-
     lemonPercentage1.html(`
-    <span>l</span>
-    <span>e</span>
-    <span>m</span>
-    <span>o</span>
-    <span>n</span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span>${lemonProbabilityArray[0] > 0 ? lemonProbabilityArray[0] : ""}</span>
+    <span>${lemonProbabilityArray[0]}</span>
     <span>${lemonProbabilityArray[1]}</span>
-    <span>%</span>
-    `);
+    <span>.</span>
+    <span>${lemonProbabilityArray[2]}</span>
+    <span>${lemonProbabilityArray[3]}</span>
+    <span>${lemonProbabilityArray[4]}</span>
+    <span>%</span>`);
+
+    // lemonPercentage1.html(`
+    // <span>l</span>
+    // <span>e</span>
+    // <span>m</span>
+    // <span>o</span>
+    // <span>n</span>
+    // <span></span>
+    // <span></span>
+    // <span></span>
+    // <span>${lemonProbabilityArray[0] > 0 ? lemonProbabilityArray[0] : ""}</span>
+    // <span>${lemonProbabilityArray[1]}</span>
+    // <span>%</span>
+    // `);
 
     predictionText1.html(results[0].className.split(",", 1));
     predictionText2.html(results[1].className.split(",", 1));
@@ -213,12 +213,15 @@ function pixelate() {
     for (let y = 0; y < pixImage.height; y += 1) {
       for (let x = 0; x < pixImage.width; x += 1) {
         let index = (x + y * pixImage.width) * 4;
+        // let r = pixImage.pixels[index + 0] || 255;
+        // let g = pixImage.pixels[index + 1] || 255;
+        // let b = pixImage.pixels[index + 2] || 255;
         let r = pixImage.pixels[index + 0];
         let g = pixImage.pixels[index + 1];
         let b = pixImage.pixels[index + 2];
         noStroke();
         fill(r, g, b);
-        // stroke(r, g, b);
+        // stroke(255);
         let rectSize = vScale * step;
 
         rect(x * vScale * step, y * vScale * step, rectSize, rectSize);

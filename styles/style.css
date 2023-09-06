@@ -69,7 +69,7 @@ video {
   width: 100%;
   height: min(100vw, 100vh);
   font-size: var(--prediction-text-size);
-  /* mix-blend-mode: difference; */
+  mix-blend-mode: difference;
   color: white;
   font-weight: 700;
 }
@@ -122,7 +122,7 @@ video {
 }
 
 #prediction {
-  height: min(25vw, 25vh);
+  height: clamp(min(16vw, 16vh), 40px, min(18vw, 18vh));
 }
 #prediction p {
   padding: 0;
