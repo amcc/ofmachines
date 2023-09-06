@@ -145,7 +145,11 @@ function percentagise(number) {
 }
 
 function splitToArray(number) {
-  let split = String(number).split(".")[1];
+  console.log("number", number);
+  let limitedNumber = number.toFixed(decimalPlaces + 2);
+
+  console.log("limitedNumber", limitedNumber);
+  let split = String(limitedNumber).split(".")[1];
   let numberArray = [];
   for (let i = 0; i < decimalPlaces + 2; i++) {
     numberArray.push(split[i]);

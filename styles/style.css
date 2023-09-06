@@ -5,6 +5,8 @@
 :root {
   --text-size: 16px;
   --bigger-text-size: 20px;
+  --title-text-mobile-size: 28px;
+  --title-text-size: 40px;
   --prediction-text-size: min(9vh, 9vw);
   /* --prediction-text-size: min(3vh, 3vw); */
 }
@@ -15,6 +17,15 @@ body {
   padding: 0;
   font-family: "Space Mono", monospace;
   font-size: var(--text-size);
+}
+
+h1 {
+  font-size: var(--title-text-mobile-size);
+}
+@media (min-width: 480px) {
+  h1 {
+    font-size: var(--title-text-size);
+  }
 }
 canvas {
   margin: 0;
@@ -109,6 +120,9 @@ video {
   padding: 10px;
 }
 
+#prediction {
+  height: min(25vw, 25vh);
+}
 #prediction p {
   padding: 0;
   margin: 0;

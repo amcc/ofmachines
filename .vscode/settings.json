@@ -1,9 +1,9 @@
-// {
-//   "liveServer.settings.root": "/",
-//   "liveServer.settings.https": {
-//     "enable": true,
-//     "cert": "/Users/alistairmcclymont/Sites/localhost.pem",
-//     "key": "/Users/alistairmcclymont/Sites/localhost.key",
-//     "passphrase": "0000"
-//   }
-// }
+{
+  "liveServer.settings.root": "/",
+  "liveServer.settings.https": {
+    "enable": true,
+    "cert": "/Users/alistairmcclymont/Sites/localhost.pem",
+    "key": "/Users/alistairmcclymont/Sites/localhost.key",
+    "passphrase": "0000"
+  }
+}
