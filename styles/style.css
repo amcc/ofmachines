@@ -5,11 +5,21 @@
 :root {
   --text-size: 16px;
   --bigger-text-size: 20px;
+  --bigger-text-mobile-size: 18px;
   --title-text-mobile-size: 28px;
   --title-text-size: 40px;
   --prediction-text-size: min(9vh, 9vw);
   /* --prediction-text-size: min(3vh, 3vw); */
   --lemon: rgba(255, 255, 0, 0);
+  --square-number: 96;
+  --square-width: calc(var(--square-number) * 1vw);
+  --square-height: calc(var(--square-number) * 1vh);
+  --square-size: min(var(--square-width), var(--square-height));
+  --divisions: 11;
+  --cell-size: min(
+    calc(var(--square-width) / var(--divisions)),
+    calc(var(--square-height) / var(--divisions))
+  );
 }
 
 html,
@@ -18,16 +28,13 @@ body {
   padding: 0;
   font-family: "Space Mono", monospace;
   font-size: var(--text-size);
+  height: 100%;
 }
 
 h1 {
   font-size: var(--title-text-mobile-size);
 }
-@media (min-width: 480px) {
-  h1 {
-    font-size: var(--title-text-size);
-  }
-}
+
 canvas {
   margin: 0;
   padding: 0;
@@ -45,7 +52,7 @@ video {
 #lemon-predictor {
   position: relative;
   width: 100%;
-  height: min(100vw, 100vh);
+  height: var(--square-size);
 }
 
 #canvas-wrapper {
@@ -56,7 +63,7 @@ video {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: min(100vw, 100vh);
+  height: var(--square-size);
 }
 
 .text-wrapper {
@@ -67,23 +74,26 @@ video {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: min(100vw, 100vh);
-  font-size: var(--prediction-text-size);
+  height: var(--square-size);
+  font-size: calc(var(--prediction-text-size) * var(--square-number) / 100);
   /* mix-blend-mode: difference; */
   color: white;
   font-weight: 700;
 }
 .min-100-square {
-  width: min(100vw, 100vh);
-  height: min(100vw, 100vh);
+  width: var(--square-size);
+  height: var(--square-size);
 }
 
 .min-100-width {
-  width: min(100vw, 100vh);
+  width: var(--square-size);
 }
 
 .lemon-container {
-  padding-top: min(calc(100vh / 11 * 5), calc(100vw / 11 * 5));
+  padding-top: min(
+    calc(var(--square-height) / 11 * 5),
+    calc(var(--square-width) / 11 * 5)
+  );
 }
 
 #lemon-2 {
@@ -91,16 +101,16 @@ video {
 }
 #lemon-percentage-1,
 #lemon-percentage-1-text {
-  width: min(100vw, 100vh);
+  width: var(--square-size);
   /* padding: min(1vw, 1vh); */
   display: flex;
 }
 #lemon-percentage-1 span,
 #lemon-percentage-1-text span {
   display: flex;
-  width: min(calc(100vh / 11), calc(100vw / 11));
-  height: min(calc(100vh / 11), calc(100vw / 11));
-  line-height: min(calc(100vh / 11), calc(100vw / 11));
+  width: var(--cell-size);
+  height: var(--cell-size);
+  line-height: var(--cell-size);
   padding: 0;
   margin: 0;
   overflow: hidden;
@@ -110,7 +120,7 @@ video {
   /* background-color: rgba(0, 0, 0, 0.2); */
 }
 .container {
-  width: min(100vw, 100vh);
+  width: var(--square-size);
   margin: 0 auto;
 }
 .full-width {
@@ -172,4 +182,13 @@ img {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+@media (min-width: 480px) {
+  h1 {
+    font-size: var(--title-text-size);
+  }
+  .bigger-text {
+    font-size: var(--bigger-text-mobile-size);
+  }
 }

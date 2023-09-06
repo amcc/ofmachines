@@ -30,8 +30,9 @@ let root = document.documentElement;
 
 function setup() {
   // put setup code here
-  let shortWindowSide = windowWidth > windowHeight ? windowHeight : windowWidth;
-  const canvas = createCanvas(shortWindowSide, shortWindowSide);
+
+  const canvasSide = canvasDimension();
+  const canvas = createCanvas(canvasSide, canvasSide);
   canvas.parent("canvas-container");
   describe("pixellated image from the webcam or phone camera", FALLBACK);
   frameRate(15);
@@ -108,9 +109,9 @@ function gotResult(error, results) {
   } else {
     resultNumber = search("lemon", results);
 
-    let predictionProbability1 = percentagise(results[0].probability);
-    let predictionProbability2 = percentagise(results[1].probability);
-    let predictionProbability3 = percentagise(results[2].probability);
+    let predictionProbability1 = percentagise(results[0].probability, 0);
+    let predictionProbability2 = percentagise(results[1].probability, 0);
+    let predictionProbability3 = percentagise(results[2].probability, 0);
 
     let lemonProbability = percentagise(results[resultNumber].probability);
 
@@ -139,11 +140,11 @@ function gotResult(error, results) {
     // `);
 
     predictionText1.html(results[0].className.split(",", 1));
-    predictionText2.html(results[1].className.split(",", 1));
-    predictionText3.html(results[2].className.split(",", 1));
+    // predictionText2.html(results[1].className.split(",", 1));
+    // predictionText3.html(results[2].className.split(",", 1));
     predictionPercentage1.html(predictionProbability1 + "%");
-    predictionPercentage2.html(predictionProbability2 + "%");
-    predictionPercentage3.html(predictionProbability3 + "%");
+    // predictionPercentage2.html(predictionProbability2 + "%");
+    // predictionPercentage3.html(predictionProbability3 + "%");
     if (resultNumber > 2) {
       lemonText.html("lemon");
       lemonPercentage2.html(lemonProbability + "%");
@@ -161,9 +162,9 @@ function gotResult(error, results) {
   }
 }
 
-function percentagise(number) {
+function percentagise(number, places = decimalPlaces) {
   const percentage = Math.round(number * 1000000) / 10000;
-  const fixed = percentage.toFixed(decimalPlaces);
+  const fixed = percentage.toFixed(places);
   if (fixed < 10) {
     return "0" + fixed;
   } else {
@@ -242,9 +243,22 @@ function getSizes() {
     capture.width > capture.height ? capture.height : capture.width;
 }
 
+function canvasDimension() {
+  const squarePercentage = Number(
+    getComputedStyle(document.documentElement).getPropertyValue(
+      "--square-number"
+    ) / 100
+  );
+  let shortWindowSide =
+    windowWidth > windowHeight
+      ? windowHeight * squarePercentage
+      : windowWidth * squarePercentage;
+  return shortWindowSide;
+}
+
 function windowResized() {
-  let shortWindowSide = windowWidth > windowHeight ? windowHeight : windowWidth;
-  resizeCanvas(shortWindowSide, shortWindowSide);
+  const canvasSide = canvasDimension();
+  resizeCanvas(canvasSide, canvasSide);
   debounce(() => getSizes());
 }
 
