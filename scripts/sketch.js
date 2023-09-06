@@ -139,12 +139,12 @@ function gotResult(error, results) {
     // <span>%</span>
     // `);
 
-    predictionText1.html(results[0].className.split(",", 1));
-    // predictionText2.html(results[1].className.split(",", 1));
-    // predictionText3.html(results[2].className.split(",", 1));
+    predictionText1.html(results[0].className.split(",", 1) + ", ");
+    predictionText2.html(results[1].className.split(",", 1) + ", ");
+    predictionText3.html(results[2].className.split(",", 1));
     predictionPercentage1.html(predictionProbability1 + "%");
-    // predictionPercentage2.html(predictionProbability2 + "%");
-    // predictionPercentage3.html(predictionProbability3 + "%");
+    predictionPercentage2.html(predictionProbability2 + "%");
+    predictionPercentage3.html(predictionProbability3 + "%");
     if (resultNumber > 2) {
       lemonText.html("lemon");
       lemonPercentage2.html(lemonProbability + "%");

@@ -147,7 +147,7 @@ video {
 }
 
 .bigger-text {
-  font-size: var(--bigger-text-size);
+  font-size: var(--bigger-text-mobile-size);
 }
 
 p {
@@ -170,6 +170,7 @@ a {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+  color: black;
 }
 img {
   width: 100%;
@@ -189,6 +190,6 @@ img {
     font-size: var(--title-text-size);
   }
   .bigger-text {
-    font-size: var(--bigger-text-mobile-size);
+    font-size: var(--bigger-text-size);
   }
 }
