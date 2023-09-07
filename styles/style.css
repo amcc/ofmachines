@@ -32,6 +32,15 @@ body {
   height: 100%;
 }
 
+aside {
+  margin-top: 2em;
+  font-size: var(--text-size-mobile);
+}
+
+footer {
+  margin: 2em 0;
+}
+
 h1,
 h2 {
   font-size: var(--title-text-mobile-size);

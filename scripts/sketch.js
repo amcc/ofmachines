@@ -17,9 +17,14 @@ let camHeight = 0;
 let predictionText1 = "";
 let predictionText2 = "";
 let predictionText3 = "";
+let firstPrediction;
+let secondPrediction;
+let thirdPrediction;
+let predictionTexts;
 let predictionPercentage1 = "";
 let lemonPercentage1 = "";
 let lemonPercentage2 = "";
+let lemonPercentage;
 let decimalPlaces = 3;
 // alpha of the lemon words
 let currentLemonValue = 0;
@@ -53,9 +58,6 @@ function setup() {
   mobilenet = ml5.imageClassifier("MobileNet", capture, modelReady);
 
   // get text ready
-  predictionText1 = select("#prediction-text-1");
-  predictionText2 = select("#prediction-text-2");
-  predictionText3 = select("#prediction-text-3");
   predictionPercentage1 = select("#prediction-percentage-1");
   predictionPercentage2 = select("#prediction-percentage-2");
   predictionPercentage3 = select("#prediction-percentage-3");
@@ -63,8 +65,11 @@ function setup() {
   lemonText = select("#lemon-text");
   lemonPercentage2 = select("#lemon-percentage-2");
 
-  let ps = selectAll("p");
-  console.log(ps);
+  firstPrediction = selectAll(".firstPredictionText");
+  secondPrediction = selectAll(".secondPredictionText");
+  thirdPrediction = selectAll(".thirdPredictionText");
+  lemonPercentage = selectAll(".lemonPercentage");
+  predictionTexts = [firstPrediction, secondPrediction, thirdPrediction];
 }
 
 function draw() {
@@ -142,9 +147,6 @@ function gotResult(error, results) {
     // <span>%</span>
     // `);
 
-    predictionText1.html(results[0].className.split(",", 1));
-    predictionText2.html(results[1].className.split(",", 1));
-    predictionText3.html(results[2].className.split(",", 1));
     predictionPercentage1.html(predictionProbability1 + "%");
     predictionPercentage2.html(predictionProbability2 + "%");
     predictionPercentage3.html(predictionProbability3 + "%");
@@ -155,6 +157,17 @@ function gotResult(error, results) {
       lemonText.html(" ");
       lemonPercentage2.html(" ");
     }
+
+    // loop through prediction classes
+    predictionTexts.forEach((text, index) => {
+      text.forEach((element) => {
+        element.html(results[index].className.split(",", 1));
+      });
+    });
+
+    lemonPercentage.forEach((element) => {
+      element.html(lemonProbability + "%");
+    });
 
     //change yellow:
     currentLemonValue = results[resultNumber].probability.toFixed(3) * 10;

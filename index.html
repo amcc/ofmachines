@@ -17,7 +17,7 @@
     <meta property="og:title" content="Of machines learning to see lemon" />
     <meta
       property="og:description"
-      content="An artwork by John Fass and Alistair McClymont"
+      content="An artwork by Alistair McClymont and John Fass"
     />
     <meta
       property="og:image"
@@ -34,7 +34,7 @@
     <meta name="twitter:title" content="Of machines learning to see lemon" />
     <meta
       name="twitter:description"
-      content="An artwork by John Fass and Alistair McClymont"
+      content="An artwork by Alistair McClymont and John Fass"
     />
     <meta
       name="twitter:image"
@@ -114,15 +114,15 @@
           <span id="prediction-text-3"></span> -->
           <p>
             <span id="prediction-percentage-1"></span>
-            <span id="prediction-text-1"></span>
+            <span class="firstPredictionText"></span>
           </p>
           <p>
             <span id="prediction-percentage-2"></span>
-            <span id="prediction-text-2"></span>
+            <span class="secondPredictionText"></span>
           </p>
           <p>
             <span id="prediction-percentage-3"></span>
-            <span id="prediction-text-3"></span>
+            <span class="thirdPredictionText"></span>
           </p>
           <p id="lemon-2">
             <span id="lemon-percentage-2"></span> <span id="lemon-text"></span>
@@ -139,13 +139,23 @@
         </p>
         <p class="bigger-text description">
           If you allow your webcam to be used, a machine learning algorithm
-          analyses whether it is seeing a <span class="lemon">lemon</span> or
-          not. The program uses MobileNet, an artificial intelligence model.
+          analyses whether it is seeing a <span class="lemon">lemon</span>, a
+          <span class="firstPredictionText">dog</span>,
+          <span class="secondPredictionText">bow tie</span>, or even a
+          <span class="thirdPredictionText">screw driver</span>.
         </p>
         <p class="bigger-text description">
-          MobileNet was trained on a dataset of 1.2 million images, it is able
-          to recognise 1000 different objects. MobileNet was trained using a
-          resource called ImageNet, a database of millions of images, each
+          The website determines the likelihood of the object being a
+          <span class="lemon">lemon</span> as a percentage. Even very un<span
+            class="lemon"
+            >lemon</span
+          >y things can appear slightly like a lemon to a machine. Right now
+          this is exactly <span class="lemonPercentage">00.000%</span>.
+        </p>
+        <p class="bigger-text description">
+          The machine learning algorithm that achieves this is MobileNet, it is
+          able to recognise 1000 different objects. MobileNet was trained using
+          a resource called ImageNet, a database of millions of images, each
           hand-labelled by humans. The dataset reproduces the human biases of
           its production including underrepresentation of certain groups,
           stereotypical representations and the presence of negative and harmful
@@ -153,11 +163,29 @@
         </p>
 
         <p class="bigger-text description">
-          <em>Of machines learning to see <span class="lemon">lemon</span></em>
+          <em
+            ><a
+              href="https://www.alistairmcclymont.com/artwork/of-machines-learning-to-see-lemon"
+              >Of machines learning to see <span class="lemon">lemon</span></a
+            ></em
+          >
           is a project that aims to materialise the way machine learning
           algorithms categorise and assign value to the data they are trained
-          on. This invisible classification process is usually intended to
-          produce automated decisions, which can have profound consequences for
+          on. It is both a physical installation and a website. The installation
+          can be seen from 13th - 17th September 2023 at
+          <a
+            href="https://www.stereolux.org/agenda/carnet-de-voyage"
+            target="_blank"
+            >Scopitone Festival in France</a
+          >. The physical installation can be seen on
+          <a
+            href="https://www.alistairmcclymont.com/artwork/of-machines-learning-to-see-lemon"
+            >Alistair McClymont's website here</a
+          >.
+        </p>
+        <p class="bigger-text description">
+          This invisible classification process is usually intended to produce
+          automated decisions, which can have profound consequences for
           individual and collective freedom. The possible benefits of machine
           learning are many, but we run the risk of developing technologies of
           such complexity that our abilities to shape them to serve the common
@@ -165,34 +193,37 @@
           machine learning as open to creative exploration and critique.
         </p>
         <figure>
-          <img
-            data-main-image=""
-            style="
-              object-fit: contain;
-              object-position: left center;
-              opacity: 1;
-            "
-            sizes="100vw"
-            decoding="async"
-            loading="lazy"
-            src="https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?w=2570&amp;h=2834&amp;auto=format"
-            srcset="
-              https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?rect=1,0,2569,2834&amp;w=320&amp;h=353&amp;auto=format    320w,
-              https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?rect=0,1,2570,2833&amp;w=654&amp;h=721&amp;auto=format    654w,
-              https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?w=768&amp;h=847&amp;auto=format                           768w,
-              https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?w=1024&amp;h=1129&amp;auto=format                        1024w,
-              https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?rect=0,1,2570,2833&amp;w=1366&amp;h=1506&amp;auto=format 1366w,
-              https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?rect=0,1,2570,2833&amp;w=1600&amp;h=1764&amp;auto=format 1600w,
-              https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?w=1920&amp;h=2117&amp;auto=format                        1920w,
-              https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?w=2048&amp;h=2258&amp;auto=format                        2048w,
-              https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?w=2560&amp;h=2823&amp;auto=format                        2560w,
-              https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?w=2570&amp;h=2834&amp;auto=format                        2570w
-            "
-            alt=""
-          />
+          <a
+            href="https://www.alistairmcclymont.com/artwork/of-machines-learning-to-see-lemon"
+          >
+            <img
+              data-main-image=""
+              style="
+                object-fit: contain;
+                object-position: left center;
+                opacity: 1;
+              "
+              sizes="100vw"
+              decoding="async"
+              loading="lazy"
+              src="https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?w=2570&amp;h=2834&amp;auto=format"
+              srcset="
+                https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?rect=1,0,2569,2834&amp;w=320&amp;h=353&amp;auto=format    320w,
+                https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?rect=0,1,2570,2833&amp;w=654&amp;h=721&amp;auto=format    654w,
+                https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?w=768&amp;h=847&amp;auto=format                           768w,
+                https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?w=1024&amp;h=1129&amp;auto=format                        1024w,
+                https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?rect=0,1,2570,2833&amp;w=1366&amp;h=1506&amp;auto=format 1366w,
+                https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?rect=0,1,2570,2833&amp;w=1600&amp;h=1764&amp;auto=format 1600w,
+                https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?w=1920&amp;h=2117&amp;auto=format                        1920w,
+                https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?w=2048&amp;h=2258&amp;auto=format                        2048w,
+                https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?w=2560&amp;h=2823&amp;auto=format                        2560w,
+                https://cdn.sanity.io/images/d66s2c55/production/3437bd4adc120b83ef4497b570fd2aa343d9d71c-2570x2834.jpg?w=2570&amp;h=2834&amp;auto=format                        2570w
+              "
+              alt=""
+          /></a>
           <figcaption>
-            <em>Of machines learning to see lemon</em>, 2018, London Design
-            Festival
+            <em>Of machines learning to see <span class="lemon">lemon</span></em
+            >, 2018, London Design Festival
           </figcaption>
         </figure>
         <section>
@@ -259,20 +290,20 @@
             in the human visual system is considered to be a function of complex
             brain processes that depend on a cascade of reflexive operations. Di
             Carlo observes, “we effortlessly detect and classify objects from
-            among tens of thousands of possibilities 7 and we do so within a
-            fraction of a second 6 despite the tremendous variation in
-            appearance that each object produces on our eyes.” The complexity of
-            these neural operations are evident in the fact that “All visual
-            cortical areas share a six-layered structure and the inputs and
-            outputs to each visual area share characteristic patterns of
-            connectivity” (DiCarlo et al. 2012) 1. The task of producing a
-            representation of sufficiently high fidelity to visually identify
-            objects is poorly understood, and there is considerable debate about
-            how it takes place in the brain. Computer scientists have
-            concentrated on constructing computational models of perception, in
-            order to produce explanations along the lines of a Turing machine,
-            i.e. mathematical models that can simulate an infinite number of
-            states. Neuroscientists, in contrast, have focused on the spatial
+            among tens of thousands of possibilities and we do so within a
+            fraction of a second despite the tremendous variation in appearance
+            that each object produces on our eyes.” The complexity of these
+            neural operations are evident in the fact that “All visual cortical
+            areas share a six-layered structure and the inputs and outputs to
+            each visual area share characteristic patterns of connectivity”
+            (DiCarlo et al. 2012). The task of producing a representation of
+            sufficiently high fidelity to visually identify objects is poorly
+            understood, and there is considerable debate about how it takes
+            place in the brain. Computer scientists have concentrated on
+            constructing computational models of perception, in order to produce
+            explanations along the lines of a Turing machine, i.e. mathematical
+            models that can simulate an infinite number of states.
+            Neuroscientists, in contrast, have focused on the spatial
             distribution of the relevant brain activity and how these areas may
             be connected to each other, in other words operating at the cellular
             and molecular level of cortical circuitry.
@@ -372,6 +403,26 @@
             plantarum. Classical Philology, 71(1), 67-76.
           </p>
         </aside>
+        <footer>
+          <p>
+            <a
+              href="https://www.alistairmcclymont.com/artwork/of-machines-learning-to-see-lemon"
+              >Find out more about this artwork here.</a
+            >
+          </p>
+          <p>
+            Copyright
+            <em
+              ><a href="https://www.alistairmcclymont.com"
+                >Alistair McClymont: alistairmcclymont.com</a
+              >
+              and
+              <a href="https://www.nomoreheroes.net/"
+                >John Fass: nomoreheroes.net</a
+              ></em
+            >. Please visit the artists' websites for more information.
+          </p>
+        </footer>
       </div>
     </main>
   </body>
