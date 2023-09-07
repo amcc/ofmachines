@@ -62,6 +62,9 @@ function setup() {
   lemonPercentage1 = select("#lemon-percentage-1");
   lemonText = select("#lemon-text");
   lemonPercentage2 = select("#lemon-percentage-2");
+
+  let ps = selectAll("p");
+  console.log(ps);
 }
 
 function draw() {
