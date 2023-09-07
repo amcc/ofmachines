@@ -138,6 +138,11 @@ video {
   align-items: center;
   /* background-color: rgba(0, 0, 0, 0.2); */
 }
+
+.jumping-prediction-para {
+  height: calc(5ch + 3 / 1vw);
+  /* overflow: hidden; */
+}
 .container {
   width: var(--square-size);
   margin: 0 auto;
