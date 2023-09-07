@@ -140,7 +140,8 @@ video {
 }
 
 .jumping-prediction-para {
-  height: calc(10ch - clamp(0vw, 0, 3vw));
+  /* height: calc(10ch - clamp(0vw, 0, 3vw)); */
+  height: clamp(5ch, 12ch - 8vw, 12ch);
   /* overflow: hidden; */
 }
 .container {
