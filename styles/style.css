@@ -140,7 +140,7 @@ video {
 }
 
 .jumping-prediction-para {
-  height: calc(5ch + 3 / 1vw);
+  height: calc(10ch - clamp(0vw, 0, 3vw));
   /* overflow: hidden; */
 }
 .container {
