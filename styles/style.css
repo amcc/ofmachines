@@ -3,7 +3,8 @@
 }
 
 :root {
-  --text-size: 16px;
+  --text-size: 18px;
+  --text-size-mobile: 16px;
   --bigger-text-size: 20px;
   --bigger-text-mobile-size: 18px;
   --title-text-mobile-size: 28px;
@@ -26,13 +27,21 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: "Space Mono", monospace;
-  font-size: var(--text-size);
+  font-family: "Open Sans", monospace;
+  font-size: var(--text-size-mobile);
   height: 100%;
 }
 
-h1 {
+h1,
+h2 {
   font-size: var(--title-text-mobile-size);
+  font-family: "Space Mono", monospace;
+  /* font-style: italic; */
+  font-weight: 400;
+}
+
+h2 {
+  margin-top: 2em;
 }
 
 canvas {
@@ -53,6 +62,7 @@ video {
   position: relative;
   width: 100%;
   height: var(--square-size);
+  font-family: "Space Mono", monospace;
 }
 
 #canvas-wrapper {
@@ -133,6 +143,7 @@ video {
 
 #prediction {
   height: clamp(min(16vw, 16vh), 40px, min(18vw, 18vh));
+  font-family: "Space Mono", monospace;
 }
 #prediction p {
   padding: 0;
@@ -151,7 +162,7 @@ video {
 }
 
 p {
-  max-width: 1000px;
+  max-width: max(50%, 800px);
 }
 
 a {
@@ -175,6 +186,9 @@ a {
 img {
   width: 100%;
 }
+figure {
+  margin: 0;
+}
 .visually-hidden {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -186,6 +200,10 @@ img {
 }
 
 @media (min-width: 480px) {
+  html,
+  body {
+    font-size: var(--text-size);
+  }
   h1 {
     font-size: var(--title-text-size);
   }
