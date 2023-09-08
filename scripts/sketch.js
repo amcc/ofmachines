@@ -340,7 +340,14 @@ const captureScreen = async () => {
 };
 
 function mousePressed() {
-  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+  if (
+    mouseX > 0 &&
+    mouseX < width &&
+    mouseY > 0 &&
+    mouseY < height &&
+    allBlack &&
+    lemonProbability
+  ) {
     captureScreen();
   }
 }
