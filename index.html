@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- oi, nosy! -->
     <title>Of machines learning to see lemon</title>
     <meta
       name="viewport"
@@ -41,9 +42,15 @@
       content="https://www.learningtoseelemon.com/images/lemon.png"
     />
 
+    <!-- get style sheet -->
     <link rel="stylesheet" type="text/css" href="styles/style.css" />
+
+    <!-- get coding scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
     <script src="https://unpkg.com/ml5@0.1.1/dist/ml5.min.js"></script>
+    <script src="scripts/html2canvas.min.js"></script>
+
+    <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
@@ -51,6 +58,8 @@
       href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
       rel="stylesheet"
     />
+
+    <!-- what are the stats - no cookies, promise -->
     <script
       defer
       data-domain="learningtoseelemon.com"
@@ -58,77 +67,64 @@
     ></script>
   </head>
   <body>
+    <!-- our p5 code -->
     <script src="scripts/sketch.js"></script>
     <main>
-      <div class="container">
-        <header class="padded">
-          <h1>Of machines learning to see <span class="lemon">lemon</span></h1>
-        </header>
-      </div>
-
-      <div id="lemon-predictor">
-        <div id="canvas-wrapper">
-          <div id="canvas-container" class="min-100-square"></div>
+      <div id="prediction-area">
+        <div class="container">
+          <header class="padded">
+            <h1>
+              Of machines learning to see <span class="lemon">lemon</span>
+            </h1>
+          </header>
         </div>
-        <!-- <section class="text-wrapper">
-          <span id="lemon-percentage-1"></span>
-        </section> -->
-        <section class="text-wrapper lemon-1">
-          <div class="min-100-square lemon-container">
-            <div>
-              <div id="lemon-percentage-1">
-                <span>0</span><span>0</span><span>.</span><span>0</span
-                ><span>0</span><span>0</span><span>%</span>
+
+        <div id="lemon-predictor">
+          <div id="canvas-wrapper">
+            <div id="canvas-container" class="min-100-square"></div>
+          </div>
+          <section class="text-wrapper lemon-1">
+            <div class="min-100-square lemon-container">
+              <div>
+                <div id="lemon-percentage-1">
+                  <span>0</span><span>0</span><span>.</span><span>0</span
+                  ><span>0</span><span>0</span><span>%</span>
+                </div>
+              </div>
+              <div>
+                <div id="lemon-percentage-1-text">
+                  <span>l</span>
+                  <span>e</span>
+                  <span>m</span>
+                  <span>o</span>
+                  <span>n</span>
+                </div>
               </div>
             </div>
-            <div>
-              <div id="lemon-percentage-1-text">
-                <span>l</span>
-                <span>e</span>
-                <span>m</span>
-                <span>o</span>
-                <span>n</span>
-              </div>
-            </div>
+          </section>
+        </div>
+        <div class="container padded">
+          <div id="prediction">
+            <p>
+              <span id="prediction-percentage-1"></span>
+              <span class="firstPredictionText"></span>
+            </p>
+            <p>
+              <span id="prediction-percentage-2"></span>
+              <span class="secondPredictionText"></span>
+            </p>
+            <p>
+              <span id="prediction-percentage-3"></span>
+              <span class="thirdPredictionText"></span>
+            </p>
+            <p id="lemon-2">
+              <span id="lemon-percentage-2"></span>
+              <span id="lemon-text"></span>
+            </p>
           </div>
-        </section>
-        <!-- <section class="text-wrapper">
-          <div id="text">
-            <div id="prediction">
-              <span id="prediction-text"></span
-              ><span id="prediction-percentage"></span>
-            </div>
-          </div>
-        </section> -->
+        </div>
       </div>
       <div class="container padded">
-        <div id="prediction">
-          <!-- list version -->
-          <!-- <span id="prediction-percentage-1"></span>
-          <span id="prediction-text-1"></span>
-
-          <span id="prediction-percentage-2"></span>
-          <span id="prediction-text-2"></span>
-
-          <span id="prediction-percentage-3"></span>
-          <span id="prediction-text-3"></span> -->
-          <p>
-            <span id="prediction-percentage-1"></span>
-            <span class="firstPredictionText"></span>
-          </p>
-          <p>
-            <span id="prediction-percentage-2"></span>
-            <span class="secondPredictionText"></span>
-          </p>
-          <p>
-            <span id="prediction-percentage-3"></span>
-            <span class="thirdPredictionText"></span>
-          </p>
-          <p id="lemon-2">
-            <span id="lemon-percentage-2"></span> <span id="lemon-text"></span>
-          </p>
-        </div>
-
         <!-- <h2>Of Machines Learning to See Lemon</h2> -->
 
         <p class="bigger-text description">

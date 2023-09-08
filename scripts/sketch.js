@@ -18,6 +18,7 @@ let camWidth = 0;
 let camHeight = 0;
 
 //text
+let lemonProbability;
 let predictionText1 = "";
 let predictionText2 = "";
 let predictionText3 = "";
@@ -38,12 +39,13 @@ let lerpRate = 0.4;
 let root = document.documentElement;
 
 function setup() {
+  // console.log(document.body, root);
   // put setup code here
 
   const canvasSide = canvasDimension();
   const canvas = createCanvas(canvasSide, canvasSide);
   canvas.parent("canvas-container");
-  describe("pixellated image from the webcam or phone camera", FALLBACK);
+  // describe("pixellated image from the webcam or phone camera", FALLBACK);
   frameRate(animFrameRate);
 
   captureWebcam();
@@ -131,7 +133,7 @@ function gotResult(error, results) {
     let predictionProbability2 = percentagise(results[1].probability, 0);
     let predictionProbability3 = percentagise(results[2].probability, 0);
 
-    let lemonProbability = percentagise(results[resultNumber].probability);
+    lemonProbability = percentagise(results[resultNumber].probability);
 
     let lemonProbabilityArray = splitToArray(results[resultNumber].probability);
     lemonPercentage1.html(`
@@ -301,4 +303,44 @@ function debounce(func, timeout = 300) {
       func.apply(this, args);
     }, timeout);
   };
+}
+
+const captureScreen = async () => {
+  const predictionArea = document.getElementById("prediction-area");
+  html2canvas(predictionArea).then(function (canvas) {
+    // console.log(canvas);
+    simulateDownloadImageClick(
+      canvas.toDataURL(),
+      "learning to see lemon " + lemonProbability + "%.png"
+    );
+  });
+
+  function simulateDownloadImageClick(uri, filename) {
+    var link = document.createElement("a");
+    if (typeof link.download !== "string") {
+      window.open(uri);
+    } else {
+      link.href = uri;
+      link.download = filename;
+      accountForFirefox(clickLink, link);
+    }
+  }
+
+  function clickLink(link) {
+    link.click();
+  }
+
+  function accountForFirefox(click) {
+    // wrapper function
+    let link = arguments[1];
+    document.body.appendChild(link);
+    click(link);
+    document.body.removeChild(link);
+  }
+};
+
+function mousePressed() {
+  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+    captureScreen();
+  }
 }

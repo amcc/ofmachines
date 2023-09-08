@@ -56,6 +56,7 @@ h2 {
 canvas {
   margin: 0;
   padding: 0;
+  cursor: pointer;
 }
 video {
   position: absolute;
@@ -67,6 +68,12 @@ video {
   z-index: 1;
 }
 
+/* #prediction-area {
+  cursor: pointer;
+} */
+#canvas-wrapper {
+  cursor: pointer;
+}
 #lemon-predictor {
   position: relative;
   width: 100%;
@@ -109,6 +116,7 @@ video {
 }
 
 .lemon-container {
+  cursor: pointer;
   padding-top: min(
     calc(var(--square-height) / 11 * 5),
     calc(var(--square-width) / 11 * 5)
