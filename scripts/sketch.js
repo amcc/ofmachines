@@ -4,6 +4,10 @@ let probability;
 let resultNumber;
 let countDown = 5;
 let receivedResult = false;
+let animFrameRate = 15;
+
+// webcam restart technique
+let allBlack = 0;
 
 //pixelation
 let img;
@@ -40,20 +44,10 @@ function setup() {
   const canvas = createCanvas(canvasSide, canvasSide);
   canvas.parent("canvas-container");
   describe("pixellated image from the webcam or phone camera", FALLBACK);
-  frameRate(15);
-  capture = createCapture(
-    {
-      audio: false,
-      video: {
-        facingMode: "environment",
-      },
-    },
-    function (e) {
-      // do things when video ready
-    }
-  );
-  capture.elt.setAttribute("playsinline", "");
-  capture.hide();
+  frameRate(animFrameRate);
+
+  captureWebcam();
+
   background(255);
   mobilenet = ml5.imageClassifier("MobileNet", capture, modelReady);
 
@@ -70,6 +64,22 @@ function setup() {
   thirdPrediction = selectAll(".thirdPredictionText");
   lemonPercentage = selectAll(".lemonPercentage");
   predictionTexts = [firstPrediction, secondPrediction, thirdPrediction];
+}
+
+function captureWebcam() {
+  capture = createCapture(
+    {
+      audio: false,
+      video: {
+        facingMode: "environment",
+      },
+    },
+    function (e) {
+      // do things when video ready
+    }
+  );
+  capture.elt.setAttribute("playsinline", "");
+  capture.hide();
 }
 
 function draw() {
@@ -225,6 +235,7 @@ function pixelate() {
     let step = squareSize / 11;
     let vScale = 1;
 
+    allBlack = 0;
     for (let y = 0; y < pixImage.height; y += 1) {
       for (let x = 0; x < pixImage.width; x += 1) {
         let index = (x + y * pixImage.width) * 4;
@@ -234,6 +245,7 @@ function pixelate() {
         let r = pixImage.pixels[index + 0];
         let g = pixImage.pixels[index + 1];
         let b = pixImage.pixels[index + 2];
+        allBlack += r + g + b;
         noStroke();
         fill(r, g, b);
         // stroke(255);
@@ -241,6 +253,9 @@ function pixelate() {
 
         rect(x * vScale * step, y * vScale * step, rectSize, rectSize);
       }
+    }
+    if (allBlack === 0 && frameCount % animFrameRate === 0) {
+      captureWebcam();
     }
   }
 }
