@@ -36,6 +36,9 @@ let currentLemonValue = 0;
 let lemonValue = 0;
 let lerpRate = 0.4;
 
+let mouseDownTimer = 0;
+let canTakeImage = true;
+
 let root = document.documentElement;
 
 function setup() {
@@ -109,6 +112,15 @@ function draw() {
   // change the yellow of the lemon words
   lemonValue = lerp(lemonValue, currentLemonValue, lerpRate);
   root.style.setProperty("--lemon", `rgb(255, 255, 0, ${lemonValue})`);
+
+  // mouse down timer
+  if (mouseIsPressed) {
+    takePicture();
+    mouseDownTimer++;
+  } else {
+    mouseDownTimer = 0;
+    canTakeImage = true;
+  }
 }
 
 function search(nameKey, myArray) {
@@ -339,15 +351,19 @@ const captureScreen = async () => {
   }
 };
 
-function mousePressed() {
+function takePicture() {
   if (
     mouseX > 0 &&
     mouseX < width &&
     mouseY > 0 &&
     mouseY < height &&
     allBlack &&
-    lemonProbability
+    lemonProbability &&
+    mouseDownTimer > animFrameRate * 1.5 &&
+    canTakeImage
   ) {
     captureScreen();
+    mouseDownTimer = 0;
+    canTakeImage = false;
   }
 }

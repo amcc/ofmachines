@@ -7,8 +7,8 @@
   --text-size-mobile: 16px;
   --bigger-text-size: 20px;
   --bigger-text-mobile-size: 18px;
-  --title-text-mobile-size: 28px;
-  --title-text-size: 40px;
+  --title-text-mobile-size: 25px;
+  --title-text-size: 28px;
   --prediction-text-size: min(9vh, 9vw);
   /* --prediction-text-size: min(3vh, 3vw); */
   --lemon: rgba(255, 255, 0, 0);
@@ -148,10 +148,9 @@ video {
 }
 
 .jumping-prediction-para {
-  /* height: calc(10ch - clamp(0vw, 0, 3vw)); */
-  height: clamp(5ch, 16ch - 8vw, 15ch);
-  /* overflow: hidden; */
+  height: clamp(13ch, 43ch - 17vw, 40ch);
 }
+
 .container {
   width: var(--square-size);
   margin: 0 auto;
