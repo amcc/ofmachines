@@ -359,7 +359,7 @@ function takePicture() {
     mouseY < height &&
     allBlack &&
     lemonProbability &&
-    mouseDownTimer > animFrameRate * 0.75 &&
+    mouseDownTimer > animFrameRate * 0.5 &&
     canTakeImage
   ) {
     captureScreen();
