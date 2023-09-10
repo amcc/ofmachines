@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 :root {
@@ -33,13 +34,17 @@ body {
 }
 
 aside {
-  border-top: 2px solid black;
   margin-top: 5em;
   font-size: var(--text-size-mobile);
 }
 
 footer {
   margin: 2em 0;
+}
+
+aside,
+footer {
+  border-top: 2px solid black;
 }
 
 h1,
