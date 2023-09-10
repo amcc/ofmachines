@@ -7,8 +7,8 @@
   --text-size-mobile: 16px;
   --bigger-text-size: 20px;
   --bigger-text-mobile-size: 18px;
-  --title-text-mobile-size: 25px;
-  --title-text-size: 28px;
+  --title-text-mobile-size: clamp(1rem, 7vw, 5rem);
+  --title-text-size: clamp(2rem, 6vw, 2.2rem);
   --prediction-text-size: min(9vh, 9vw);
   /* --prediction-text-size: min(3vh, 3vw); */
   --lemon: rgba(255, 255, 0, 0);
@@ -121,6 +121,7 @@ video {
 
 .lemon-container {
   cursor: pointer;
+  pointer-events: none;
   padding-top: min(
     calc(var(--square-height) / 11 * 5),
     calc(var(--square-width) / 11 * 5)
@@ -230,7 +231,8 @@ figure {
   body {
     font-size: var(--text-size);
   }
-  h1 {
+  h1,
+  h2 {
     font-size: var(--title-text-size);
   }
   .bigger-text {
