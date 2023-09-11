@@ -41,13 +41,7 @@ let canTakeImage = true;
 
 // info
 // info and download buttons for the html
-let closeButton;
-let downloadButton;
-let initialDownloadButtonHtml;
-let infoHtml;
-let infoOuterHtml;
-let initialInfoButtonHtml;
-let hideInfoHtml = true;
+let camera;
 
 let root = document.documentElement;
 
@@ -81,17 +75,7 @@ function setup() {
   predictionTexts = [firstPrediction, secondPrediction, thirdPrediction];
 
   // info / download button stuff
-  infoOuterHtml = select("#info");
-  infoHtml = select("#info-inner");
-  closeButton = select("#close-button");
-  initialInfoButtonHtml = closeButton.html();
-  console.log("initialDownloadHtml", initialInfoButtonHtml);
-
-  downloadButton = select("#download");
-  initialDownloadButtonHtml = downloadButton.html();
-
-  document.getElementById("download").addEventListener("click", takePicture);
-  document.getElementById("close-button").addEventListener("click", hideInfo);
+  document.getElementById("camera").addEventListener("click", takePicture);
 }
 
 function captureWebcam() {
@@ -375,19 +359,8 @@ const captureScreen = async () => {
 };
 
 function takePicture() {
-  if (allBlack && lemonProbability) {
-    captureScreen();
-  }
+  console.log("snap");
+  // if (allBlack && lemonProbability) {
+  captureScreen();
+  // }
 }
-
-const hideInfo = () => {
-  console.log("hi");
-  if (hideInfoHtml) {
-    infoHtml.removeClass("hidden");
-    closeButton.html("&darr; close");
-  } else {
-    infoHtml.addClass("hidden");
-    closeButton.html(initialInfoButtonHtml);
-  }
-  hideInfoHtml = !hideInfoHtml;
-};
