@@ -127,6 +127,7 @@ video {
 .lemon-container {
   cursor: pointer;
   pointer-events: none;
+  user-select: none;
   padding-top: min(
     calc(var(--square-height) / 11 * 5),
     calc(var(--square-width) / 11 * 5)
@@ -151,6 +152,8 @@ video {
   padding: 0;
   margin: 0;
   overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
 
   justify-content: center;
   align-items: center;
