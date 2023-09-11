@@ -278,7 +278,7 @@ button {
   font-family: "Space Mono", monospace;
   position: fixed;
   bottom: 0;
-  left: 0;
+  right: 0;
   padding: 0 1rem 0 1rem;
   z-index: 200;
   /*   background-color: rgba(255,255,255,0.6); */
@@ -289,7 +289,7 @@ button {
 }
 
 #info:has(.hidden) {
-  border-right: 1px solid black;
+  border-left: 1px solid black;
 }
 
 #info-inner {
@@ -311,6 +311,7 @@ button {
   #info {
     /*     padding: 2rem; */
     max-width: 50vw;
-    border-right: 1px solid black;
+    border-right: 0px solid black;
+    border-left: 0px solid black;
   }
 }
