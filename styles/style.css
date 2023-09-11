@@ -243,7 +243,7 @@ figure {
   position: fixed;
   bottom: 0;
   right: 0;
-  padding: 0 0.5rem 0 0.5rem;
+  padding: 0;
   z-index: 200;
 }
 
@@ -256,7 +256,7 @@ figure {
 #info svg {
   width: 37px;
   height: 37px;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 @media (min-width: 480px) {
@@ -275,13 +275,11 @@ figure {
     margin: 40px 0;
   }
   #info {
-    /*     padding: 2rem; */
     max-width: 50vw;
-    /* border-right: 1px solid black;
-    border-left: 1px solid black; */
+    padding: 0 0.5rem 0 0.5rem;
   }
   #info svg {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
   }
 }
