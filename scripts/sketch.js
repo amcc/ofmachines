@@ -39,6 +39,16 @@ let lerpRate = 0.4;
 let mouseDownTimer = 0;
 let canTakeImage = true;
 
+// info
+// info and download buttons for the html
+let closeButton;
+let downloadButton;
+let initialDownloadButtonHtml;
+let infoHtml;
+let infoOuterHtml;
+let initialInfoButtonHtml;
+let hideInfoHtml = true;
+
 let root = document.documentElement;
 
 function setup() {
@@ -69,6 +79,19 @@ function setup() {
   thirdPrediction = selectAll(".thirdPredictionText");
   lemonPercentage = selectAll(".lemonPercentage");
   predictionTexts = [firstPrediction, secondPrediction, thirdPrediction];
+
+  // info / download button stuff
+  infoOuterHtml = select("#info");
+  infoHtml = select("#info-inner");
+  closeButton = select("#close-button");
+  initialInfoButtonHtml = closeButton.html();
+  console.log("initialDownloadHtml", initialInfoButtonHtml);
+
+  downloadButton = select("#download");
+  initialDownloadButtonHtml = downloadButton.html();
+
+  document.getElementById("download").addEventListener("click", takePicture);
+  document.getElementById("close-button").addEventListener("click", hideInfo);
 }
 
 function captureWebcam() {
@@ -114,13 +137,13 @@ function draw() {
   root.style.setProperty("--lemon", `rgb(255, 255, 0, ${lemonValue})`);
 
   // mouse down timer
-  if (mouseIsPressed) {
-    takePicture();
-    mouseDownTimer++;
-  } else {
-    mouseDownTimer = 0;
-    canTakeImage = true;
-  }
+  // if (mouseIsPressed) {
+  //   takePicture();
+  //   mouseDownTimer++;
+  // } else {
+  //   mouseDownTimer = 0;
+  //   canTakeImage = true;
+  // }
 }
 
 function search(nameKey, myArray) {
@@ -352,18 +375,19 @@ const captureScreen = async () => {
 };
 
 function takePicture() {
-  if (
-    mouseX > 0 &&
-    mouseX < width &&
-    mouseY > 0 &&
-    mouseY < height &&
-    allBlack &&
-    lemonProbability &&
-    mouseDownTimer > animFrameRate * 0.5 &&
-    canTakeImage
-  ) {
+  if (allBlack && lemonProbability) {
     captureScreen();
-    mouseDownTimer = 0;
-    canTakeImage = false;
   }
 }
+
+const hideInfo = () => {
+  console.log("hi");
+  if (hideInfoHtml) {
+    infoHtml.removeClass("hidden");
+    closeButton.html("&darr; close");
+  } else {
+    infoHtml.addClass("hidden");
+    closeButton.html(initialInfoButtonHtml);
+  }
+  hideInfoHtml = !hideInfoHtml;
+};

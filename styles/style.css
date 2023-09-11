@@ -28,7 +28,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: "Open Sans", monospace;
+  font-family: "Open Sans", sans-serif;
   font-size: var(--text-size-mobile);
   height: 100%;
 }
@@ -152,8 +152,6 @@ video {
   padding: 0;
   margin: 0;
   overflow: hidden;
-  user-select: none;
-  -webkit-user-select: none;
 
   justify-content: center;
   align-items: center;
@@ -234,6 +232,70 @@ figure {
   width: 1px;
 }
 
+/*  info / download button  */
+button {
+  font-family: "Space Mono", monospace;
+  font-size: 100%;
+  color: #000;
+  /* font-style: italic; */
+}
+#close-button {
+  background: transparent;
+  border: 2px solid transparent;
+  padding: 5px 0;
+  text-decoration: underline;
+  color: black;
+}
+#download {
+  background: black;
+  color: white;
+  border: 2px solid transparent;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+#close-button:focus,
+#download:focus {
+  outline: none;
+  /* border-bottom: 2px solid magenta; */
+}
+#download.active,
+#download.active:focus {
+  background: cyan;
+}
+.hidden {
+  display: none;
+}
+.show {
+  right: 0;
+}
+
+.hide {
+  right: 100vw;
+}
+
+#info {
+  font-family: "Space Mono", monospace;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 0 1rem 0 1rem;
+  z-index: 200;
+  /*   background-color: rgba(255,255,255,0.6); */
+  max-width: 100vw;
+  background-color: white;
+  border-top: 1px solid black;
+  /* border-right: 0px solid black; */
+}
+
+#info:has(.hidden) {
+  border-right: 1px solid black;
+}
+
+#info-inner {
+  padding-bottom: 1rem;
+}
+
 @media (min-width: 480px) {
   html,
   body {
@@ -245,5 +307,10 @@ figure {
   }
   .bigger-text {
     font-size: var(--bigger-text-size);
+  }
+  #info {
+    /*     padding: 2rem; */
+    max-width: 50vw;
+    border-right: 1px solid black;
   }
 }
