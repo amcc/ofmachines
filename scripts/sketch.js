@@ -11,7 +11,7 @@ let screenOrientation = "unset";
 let allBlack = 0;
 
 //pixelation
-let gridSize = 11;
+let gridSize = 40;
 let img;
 let squareSize = 0;
 let camDiff = 0;
