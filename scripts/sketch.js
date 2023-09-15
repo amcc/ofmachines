@@ -1,21 +1,24 @@
 let mobilenet;
 let capture;
+let captureEvent;
 let probability;
 let resultNumber;
-let countDown = 5;
 let receivedResult = false;
 let animFrameRate = 15;
+let screenOrientation = "unset";
 
 // webcam restart technique
 let allBlack = 0;
 
 //pixelation
+let gridSize = 11;
 let img;
 let squareSize = 0;
 let camDiff = 0;
 let camShortSide = 0;
 let camWidth = 0;
 let camHeight = 0;
+let loadedCamera;
 
 //text
 let lemonProbability;
@@ -87,7 +90,10 @@ function captureWebcam() {
       },
     },
     function (e) {
+      captureEvent = e;
       // do things when video ready
+      // until then, the video element will have no dimensions, or default 640x480
+      setCameraDimensions();
     }
   );
   capture.elt.setAttribute("playsinline", "");
@@ -95,17 +101,24 @@ function captureWebcam() {
 }
 
 function draw() {
-  makeCamImage();
+  // check orientation
+  if (
+    screenOrientation !== screen.orientation.type.match(/\w+/)[0] &&
+    screenOrientation !== "unset"
+  ) {
+    console.log("reload");
+    location.reload();
+  }
+
+  screenOrientation = screen.orientation.type.match(/\w+/)[0];
+
+  // the camera is loaded with correct sizes here, we must wait
+  // default when camera is loaded is landscape and 640 x 480, but it will
+  // show correct settings when loaded
+  if (loadedCamera && capture) makeCamImage();
   pixelate();
   // image(img, 0, 0, img.width * 23.4, img.height * 23.4);
 
-  // background(0);
-  // only predict every now and then
-  // if (countDown == 0) {
-  //   mobilenet.predict(1000, gotResult);
-  //   countDown = 15;
-  // }
-  countDown--;
   // make the text
   fill(0);
   textFont("Roboto Condensed");
@@ -119,15 +132,41 @@ function draw() {
   // change the yellow of the lemon words
   lemonValue = lerp(lemonValue, currentLemonValue, lerpRate);
   root.style.setProperty("--lemon", `rgb(255, 255, 0, ${lemonValue})`);
+}
 
-  // mouse down timer
-  // if (mouseIsPressed) {
-  //   takePicture();
-  //   mouseDownTimer++;
-  // } else {
-  //   mouseDownTimer = 0;
-  //   canTakeImage = true;
-  // }
+function makeCamImage() {
+  getSizes();
+
+  img = createImage(gridSize, gridSize);
+
+  if (screenOrientation === "landscape" || screenOrientation === "unset") {
+    // if (loadedCamera.width > loadedCamera.height) {
+    img.copy(
+      capture,
+      camDiff,
+      0,
+      camShortSide,
+      camShortSide,
+      0,
+      0,
+      gridSize,
+      gridSize
+    );
+  } else {
+    img.copy(
+      capture,
+      0,
+      camDiff,
+      camShortSide,
+      camShortSide,
+      0,
+      0,
+      gridSize,
+      gridSize
+    );
+  }
+
+  image(capture, 0, 0, width, height);
 }
 
 function search(nameKey, myArray) {
@@ -229,31 +268,13 @@ function splitToArray(number) {
   return numberArray;
 }
 
-function makeCamImage() {
-  // if (capture.width !== camWidth || capture.height !== camHeight) {
-  //   debounce(() => getSizes());
-  //   camWidth = capture.width;
-  //   camHeight = capture.height;
-  // }
-  getSizes();
-  // The capture element is initially smaller than it should be
-
-  img = createImage(11, 11);
-
-  if (capture.width > capture.height) {
-    img.copy(capture, camDiff, 0, camShortSide, camShortSide, 0, 0, 11, 11);
-  } else {
-    img.copy(capture, 0, camDiff, camShortSide, camShortSide, 0, 0, 11, 11);
-  }
-}
-
 function pixelate() {
   //to do - scale image down to 11px then go through all px
   if (img) {
     let pixImage = img.get();
     pixImage.loadPixels();
     // let step = Math.ceil(squareSize / 11);
-    let step = squareSize / 11;
+    let step = squareSize / gridSize;
     let vScale = 1;
 
     allBlack = 0;
@@ -308,10 +329,20 @@ function canvasDimension() {
   return shortWindowSide;
 }
 
+function setCameraDimensions() {
+  loadedCamera = captureEvent.getTracks()[0].getSettings();
+  console.log("cameraDimensions", loadedCamera);
+}
+
 function windowResized() {
+  // capture = null;
+  // captureWebcam();
   const canvasSide = canvasDimension();
   resizeCanvas(canvasSide, canvasSide);
   debounce(() => getSizes());
+  // debounce(() => captureWebcam());
+  // debounce(() => setCameraDimensions());
+  setCameraDimensions();
 }
 
 function debounce(func, timeout = 300) {
