@@ -11,11 +11,14 @@
   --title-text-mobile-size: clamp(1rem, 7vw, 5rem);
   --title-text-size: clamp(2rem, 6vw, 2.2rem);
   --prediction-text-size: min(9vh, 9vw);
+  --prediction-text-size: min(9lvh, 9lvw);
   /* --prediction-text-size: min(3vh, 3vw); */
   --lemon: rgba(255, 255, 0, 0);
   --square-number: 96;
   --square-width: calc(var(--square-number) * 1vw);
+  --square-width: calc(var(--square-number) * 1lvw);
   --square-height: calc(var(--square-number) * 1vh);
+  --square-height: calc(var(--square-number) * 1lvh);
   --square-size: min(var(--square-width), var(--square-height));
   --divisions: 11;
   --cell-size: min(
